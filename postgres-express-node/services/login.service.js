@@ -39,10 +39,13 @@ class LoginService {
 			};
 
 			const token = this.generateToken(payload);
-
 			return { user, token };
 		}
+
+		this.logger.error("");
+		throw new Error("Authentication failed");
 	}
+
 	generateToken(payload) {
 		return jwt.sign(payload, config.jwt.secret, {
 			expiresIn: config.jwt.expiresIn,
